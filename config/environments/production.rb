@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Without the following line, you may have diddiculty deleting once deployed to Heroku.
+  config.serve_static_assets = true
 end
