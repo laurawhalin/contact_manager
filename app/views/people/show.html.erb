@@ -10,16 +10,16 @@
   <%= @person.last_name %>
 </p>
 
-<ul>
+<ul class="phones_list">
   <% @person.phone_numbers.each do |phone| %>
     <li><%= phone.number %> <%= link_to('edit', edit_phone_number_path(phone)) %>
         <%= link_to 'delete', phone_number_path(phone), method: :delete %></li>
   <% end %>
 </ul>
 
-<ul>
+<ul class="emails_list">
   <% @person.email_addresses.each do |email| %>
-    <li><%= email.address %></li>
+    <li><%= email.address %> <%= link_to('edit', edit_email_address_path(email)) %></li>
   <% end %>
 </ul>
 
