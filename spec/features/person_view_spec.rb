@@ -111,7 +111,7 @@ describe 'the person view', type: :feature do
         end
       end
 
-      xit 'deletes an email address' do
+      it 'deletes an email address' do
         email = person.email_addresses.first
 
         within(".emails_list") do
