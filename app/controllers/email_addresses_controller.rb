@@ -14,7 +14,7 @@ class EmailAddressesController < ApplicationController
 
   # GET /email_addresses/new
   def new
-    @email_address = EmailAddress.new(contact_id: params[:contact_id])
+    @email_address = EmailAddress.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
   end
 
   # GET /email_addresses/1/edit
