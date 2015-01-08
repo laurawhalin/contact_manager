@@ -28,7 +28,7 @@ RSpec.describe PhoneNumbersController, :type => :controller do
   }
 
   let(:invalid_attributes) {
-    { number: nil, contact_id: nil, contact_type: nil}
+    { number: nil, contact_id: nil, contact_type: nil }
   }
 
   # This should return the minimal set of values that should be in the session

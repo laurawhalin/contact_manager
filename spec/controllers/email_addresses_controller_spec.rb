@@ -24,11 +24,11 @@ RSpec.describe EmailAddressesController, :type => :controller do
   # EmailAddress. As you add validations to EmailAddress, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { address: "pickles@pickle.com", contact_id: 1, contact_type: 'Company'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { address: nil, contact_id: nil, contact_type: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -70,8 +70,8 @@ RSpec.describe EmailAddressesController, :type => :controller do
   describe "POST create" do
     describe "with valid params" do
 
-      let(:tom) { Person.create(first_name: 'Tom', last_name: 'Thumb') }
-      let(:valid_attributes) { {address: 'yolo@gmail.com', person_id: tom.id} }
+      let(:pickles) { Company.create(name: 'Pickle Company') }
+      let(:valid_attributes) { {address: 'pickles@pickle.com', contact_id: pickles.id, contact_type: 'Company' } }
 
       it "creates a new EmailAddress" do
         expect {
@@ -87,7 +87,7 @@ RSpec.describe EmailAddressesController, :type => :controller do
 
       it "redirects to the created email_address" do
         post :create, {:email_address => valid_attributes}, valid_session
-        expect(response).to redirect_to(tom)
+        expect(response).to redirect_to(pickles)
       end
     end
 
@@ -107,16 +107,16 @@ RSpec.describe EmailAddressesController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
 
-      let(:jill) { Person.create(first_name: "Jill", last_name: "Pink") }
-      let(:valid_attributes) { {address: 'panda@msn.com', person_id: jill.id} }
-      let(:new_attributes) { { address: 'MyNewString', person_id: jill.id} }
+      let(:salsa) { Company.create(name: "Salsa Company") }
+      let(:valid_attributes) { {address: 'salsa@salsa.com', contact_id: salsa.id, contact_type: 'Company'} }
+      let(:new_attributes) { { address: 'MyNewEmail', contact_id: salsa.id, contact_type: 'Company' } }
 
       it "updates the requested email_address" do
         email_address = EmailAddress.create! valid_attributes
         put :update, {:id => email_address.to_param, :email_address => new_attributes}, valid_session
         email_address.reload
-        expect(email_address.address).to eq('MyNewString')
-        expect(email_address.person_id).to eq(jill.id)
+        expect(email_address.address).to eq('MyNewEmail')
+        expect(email_address.contact_id).to eq(salsa.id)
       end
 
       it "assigns the requested email_address as @email_address" do
@@ -128,7 +128,7 @@ RSpec.describe EmailAddressesController, :type => :controller do
       it "redirects to the email_address" do
         email_address = EmailAddress.create! valid_attributes
         put :update, {:id => email_address.to_param, :email_address => valid_attributes}, valid_session
-        expect(response).to redirect_to(jill)
+        expect(response).to redirect_to(salsa)
       end
     end
 
@@ -148,6 +148,10 @@ RSpec.describe EmailAddressesController, :type => :controller do
   end
 
   describe "DELETE destroy" do
+
+    let(:pickles) { Company.create(name: "Pickles Company") }
+    let(:valid_attributes) { {address: 'pickles@mypickle.com', contact_id: pickles.id, contact_type: 'Company'} }
+
     it "destroys the requested email_address" do
       email_address = EmailAddress.create! valid_attributes
       expect {
@@ -156,12 +160,9 @@ RSpec.describe EmailAddressesController, :type => :controller do
     end
 
     it "redirects to the email_addresses list" do
-      lindy = Person.create(first_name: "Lindy", last_name: "Hop")
-      valid_attributes = { address: 'lindypoo@hotmail.com', person_id: lindy.id }
       email_address = EmailAddress.create! valid_attributes
       delete :destroy, {:id => email_address.to_param}, valid_session
-      expect(response).to redirect_to(lindy)
+      expect(response).to redirect_to(pickles)
     end
   end
-
 end
