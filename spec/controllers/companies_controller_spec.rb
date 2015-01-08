@@ -24,11 +24,11 @@ RSpec.describe CompaniesController, :type => :controller do
   # Company. As you add validations to Company, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { name: "Pickle Company", contact_id: 1, contact_type: 'Business'}
+    { name: "Pickle Company"}
   }
 
   let(:invalid_attributes) {
-    { name: nil, contact_id: nil, contact_type: nil }
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
